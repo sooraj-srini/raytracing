@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 vecmath = "1.0.0"
 geometric = "0.2.1"
+glam = "0.21.3"
