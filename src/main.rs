@@ -1,8 +1,26 @@
 pub mod ray;
-use geometric::{vec3, Vector3};
+use geometric::{vec3, Vector3, Dot};
 use ray::ray::Ray;
 
+fn hit_sphere(ray:&Ray, center: &Vector3<f64>, radius:f64) -> f64 {
+    let point = ray.orig().clone() - center.clone();
+    let a = ray.direction().dot(ray.direction());
+    let b = 2.0 * point.dot(ray.direction());
+    let c = point.dot(point) - radius * radius;
+    let discriminant = b * b - 4.0 * a * c;
+    if discriminant < 0.0 {
+        return -1.0;
+    } else {
+        return -b - discriminant.sqrt() / (2.0 * a);
+    }
+}
+
 fn ray_color(ray:&Ray) -> Vector3<f64> {
+    let t =  hit_sphere(ray, &vec3(0.0, 0.0, -1.0), 0.5); 
+    if t > 0.0 {
+        let normal = (ray.at(t) - vec3(0.0, 0.0, -1.0)).norm();
+        return vec3(normal.x() + 1.0, normal.y() + 1.0, normal.z() + 1.0)*0.5;
+    }
     let u = ray.direction().norm();
     let t = 0.5*(u.y() + 1.0);
     return vec3(1.0, 1.0, 1.0)*(1.0 - t) + vec3(0.5, 0.7, 1.0)*t;

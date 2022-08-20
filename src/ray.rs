@@ -9,10 +9,10 @@ pub mod ray {
     }
 
     impl Ray {
-        pub fn orig(&mut self) -> &Vector3<f64> {
+        pub fn orig(&self) -> &Vector3<f64> {
             &self.origin
         }
-        pub fn at(&mut self, t: f64) -> Vector3<f64> {
+        pub fn at(&self, t: f64) -> Vector3<f64> {
             self.origin + self.dir * t
         }
         pub fn direction(&self) -> Vector3<f64> {
