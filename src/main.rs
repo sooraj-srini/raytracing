@@ -1,6 +1,8 @@
-pub mod ray;
+mod ray;
+mod hittable;
+mod sphere;
 use geometric::{vec3, Vector3, Dot};
-use ray::ray::Ray;
+use ray::Ray;
 
 fn hit_sphere(ray:&Ray, center: &Vector3<f64>, radius:f64) -> f64 {
     let point = ray.orig().clone() - center.clone();
