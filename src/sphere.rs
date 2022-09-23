@@ -9,9 +9,16 @@ pub struct Sphere {
     center: Vector3<f64>,
     radius: f64,
 }
+
+impl Sphere {
+    pub fn new(center: Vector3<f64>, radius: f64) -> Self {
+        Self { center, radius }
+    }
+}
+
 impl Hittable for Sphere {
     fn hit(&self, ray: &Ray, t_min: f64, t_max: f64, rec: &mut HitRecord) -> bool {
-        let oc = ray.direction() - self.center;
+        let oc = ray.orig().clone() - self.center;
         let a = ray.direction().mag_sq();
         let half_b = oc.dot(ray.direction());
         let c = oc.mag_sq() - self.radius * self.radius;

@@ -2,6 +2,7 @@ use crate::ray::Ray;
 use geometric::{Vector3, Dot};
 
 //A Struct that stores the information about a hit
+#[derive(Default, Copy, Clone)]
 pub struct HitRecord {
     pub t: f64,
     pub p: Vector3<f64>,
